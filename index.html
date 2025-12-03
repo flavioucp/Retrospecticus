@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cápsula del Tiempo - Misión Aprendizaje</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- Fondo con estrellas -->
+    <canvas id="stars"></canvas>
+
+    <div class="container">
+        <h1 class="title">🚀 Cápsula del Tiempo – Misión 2025</h1>
+        <p class="subtitle">Registrá tu viaje personal de aprendizaje</p>
+
+        <div class="rocket"></div>
+
+        <form id="capsulaForm">
+            <label>👨‍🚀 Nombre / Identificación</label>
+            <input type="text" id="nombre" required />
+
+            <label>✨ ¿Qué aprendiste este año?</label>
+            <textarea id="aprendido" rows="3"></textarea>
+
+            <label>🛸 ¿Qué sentís que todavía no sabés?</label>
+            <textarea id="noSe" rows="3"></textarea>
+
+            <label>🔭 ¿Qué te gustaría aprender para mejorar eso que no sabés?</label>
+            <textarea id="mejorar" rows="3"></textarea>
+
+            <label>🗺️ ¿Tenés claro el camino para aprenderlo?</label>
+            <textarea id="camino" rows="2"></textarea>
+
+            <label>😨 ¿Qué te da miedo no saber?</label>
+            <textarea id="miedo" rows="2"></textarea>
+
+            <label>💡 ¿Sentís que lo podés aprender?</label>
+            <textarea id="confianza" rows="2"></textarea>
+
+            <button class="btn" type="submit">Guardar en la Cápsula</button>
+        </form>
+
+        <!-- Mensaje de guardado simple -->
+        <p class="saved" id="savedMessage">✨ ¡Guardado en la Cápsula! ✨</p>
+    </div>
+
+    <!-- Cápsula mágica -->
+    <div id="capsulaMagic" class="capsula-magic">
+        <img src="https://i.imgur.com/7yAiQXH.png" class="capsula-img" alt="Capsula del tiempo">
+        <p id="capsulaText" class="capsula-text"></p>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

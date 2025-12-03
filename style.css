@@ -1,0 +1,179 @@
+/* ======== FONDO CYBERPUNK ======== */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-y: auto;   /* Permite desplazamiento */
+    overflow-x: hidden; /* Evita desplazamiento lateral */
+    background: black;
+    color: #e5faff;
+}
+
+#stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+
+/* ======== CONTENEDOR ======== */
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    backdrop-filter: blur(7px);
+    background: rgba(0, 0, 30, 0.55);
+    border: 1px solid #2affff88;
+    border-radius: 14px;
+    box-shadow: 0 0 20px #00e2ff88;
+    animation: appear 1.2s ease;
+}
+
+@keyframes appear {
+    from {opacity:0; transform: translateY(20px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+
+/* ======== TITULOS ======== */
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #7df0ff;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+.subtitle {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+/* ======== COHETE ANIMADO ======== */
+
+.rocket {
+    width: 90px;
+    height: 140px;
+    margin: 0 auto 20px;
+    background-image: url('https://i.imgur.com/KB1vTAF.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+}
+
+
+/* ======== FORMULARIO ======== */
+
+label {
+    margin-top: 15px;
+    display: block;
+    font-weight: bold;
+    color: #9ff3ff;
+}
+
+input, textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid #29e3ff;
+    color: white;
+    margin-top: 6px;
+    padding: 12px;
+    border-radius: 10px;
+    outline: none;
+    transition: 0.2s;
+    font-size: 1rem;
+    resize: none;
+}
+
+input:focus, textarea:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 10px #00ffff55;
+}
+
+/* ======== BOTÓN ======== */
+
+.btn {
+    margin-top: 25px;
+    padding: 15px;
+    background: #00c8ff;
+    border: none;
+    color: black;
+    border-radius: 12px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: 0.25s;
+    width: 100%;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #6df7ff;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px #00f6ff;
+}
+
+/* ======== MENSAJE DE GUARDADO ======== */
+
+.saved {
+    text-align: center;
+    margin-top: 20px;
+    color: #90faff;
+    opacity: 0;
+    transition: 0.5s;
+    font-size: 1.2rem;
+}
+
+
+/* ======== CAPSULA MÁGICA ======== */
+
+.capsula-magic {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    background: rgba(0, 0, 30, 0.9);
+    padding: 30px;
+    border: 2px solid #00eaff;
+    border-radius: 20px;
+    box-shadow: 0 0 30px #00eaffaa;
+    text-align: center;
+    width: 350px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+    z-index: 10;
+}
+
+.capsula-magic.show {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.capsula-img {
+    width: 160px;
+    animation: glow 2s infinite ease-in-out;
+}
+
+@keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 10px #00ffff); }
+    50% { filter: drop-shadow(0 0 22px #00ffee); }
+}
+
+.capsula-text {
+    color: #c9ffff;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    text-shadow: 0 0 5px #00ffff;
+}
