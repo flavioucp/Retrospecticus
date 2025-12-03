@@ -1,10 +1,15 @@
 /* ====================
-   GUARDAR EN LOCALSTORAGE + CAPSULA MÁGICA
+   IMPORTAR FIREBASE
+==================== */
+import { db } from "./firebase.js";
+import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+
+/* ====================
+   FORMULARIO + CAPSULA
 ==================== */
 
 const form = document.getElementById("capsulaForm");
 const savedMessage = document.getElementById("savedMessage");
-
 const capsulaMagic = document.getElementById("capsulaMagic");
 const capsulaText = document.getElementById("capsulaText");
 
@@ -16,7 +21,7 @@ const mensajesMagicos = [
     "🔮 Tu potencial acaba de activar un nuevo camino."
 ];
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const data = {
@@ -26,30 +31,33 @@ form.addEventListener("submit", (e) => {
         mejorar: document.getElementById("mejorar").value,
         camino: document.getElementById("camino").value,
         miedo: document.getElementById("miedo").value,
-        confianza: document.getElementById("confianza").value
+        confianza: document.getElementById("confianza").value,
+        fecha: serverTimestamp()
     };
 
-    // Guarda la info por nombre
-    localStorage.setItem("capsula_" + data.nombre, JSON.stringify(data));
+    try {
+        // Guardar en Firebase Firestore
+        await addDoc(collection(db, "capsulas"), data);
 
-    // Muestra mensaje luminoso del formulario
-    savedMessage.style.opacity = 1;
-    setTimeout(() => savedMessage.style.opacity = 0, 2000);
+        // Mostrar mensaje de guardado
+        savedMessage.style.opacity = 1;
+        setTimeout(() => savedMessage.style.opacity = 0, 2000);
 
-    // Mensaje mágico aleatorio
-    const mensaje = mensajesMagicos[Math.floor(Math.random() * mensajesMagicos.length)];
-    capsulaText.textContent = mensaje;
+        // Mostrar cápsula mágica
+        const mensaje = mensajesMagicos[Math.floor(Math.random() * mensajesMagicos.length)];
+        capsulaText.textContent = mensaje;
+        capsulaMagic.classList.add("show");
 
-    // Muestra cápsula animada
-    capsulaMagic.classList.add("show");
+        setTimeout(() => {
+            capsulaMagic.classList.remove("show");
+        }, 4000);
 
-    // La oculta después de 4 segundos
-    setTimeout(() => {
-        capsulaMagic.classList.remove("show");
-    }, 4000);
+        form.reset();
 
-    // Limpiar formulario
-    form.reset();
+    } catch (error) {
+        console.error("Error al guardar:", error);
+        alert("Hubo un error al guardar. Revisá la consola.");
+    }
 });
 
 
@@ -97,38 +105,3 @@ function animate() {
 }
 
 animate();
-// script.js
-import { db } from "./firebase.js";
-import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
-
-document.getElementById("capsuleForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("name").value;
-    const learned = document.getElementById("learned").value;
-    const dontKnow = document.getElementById("dontKnow").value;
-    const wantLearn = document.getElementById("wantLearn").value;
-    const fear = document.getElementById("fear").value;
-    const feelsAble = document.getElementById("feelsAble").value;
-
-    try {
-        await addDoc(collection(db, "capsulas"), {
-            name,
-            learned,
-            dontKnow,
-            wantLearn,
-            fear,
-            feelsAble,
-            createdAt: serverTimestamp()
-        });
-
-        document.getElementById("capsuleForm").reset();
-
-        // Mostrar pantalla mágica
-        document.getElementById("magicMessage").classList.add("show");
-
-    } catch (error) {
-        console.error("Error al guardar en Firebase:", error);
-        alert("Hubo un error, intenta de nuevo.");
-    }
-});
